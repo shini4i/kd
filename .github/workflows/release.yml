@@ -1,0 +1,26 @@
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  homebrew-releaser:
+    runs-on: ubuntu-latest
+    name: homebrew-releaser
+    steps:
+      - name: Release my project to my Homebrew tap
+        uses: Justintime50/homebrew-releaser@v1
+        with:
+          homebrew_owner: shini4i
+          homebrew_tap: homebrew-tap
+          formula_folder: Formula
+          github_token: ${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}
+
+          commit_owner: homebrew-releaser
+          commit_email: homebrew-releaser@linux-tech.io
+
+          depends_on: |
+            "kubernetes-cli"
+            "yq"
+
+          install: 'bin.install "kd" => "kd"'
