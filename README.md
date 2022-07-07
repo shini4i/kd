@@ -9,6 +9,12 @@ There are alternatives to this script, but they are either not maintained or req
 - kubectl
 - yq
 
+## Installation
+The script can be installed using brew:
+```bash
+brew install shini4i/tap/kd
+```
+
 ## Usage
 ```bash
 kd <secret-name> <namespace>
