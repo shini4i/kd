@@ -16,11 +16,11 @@ jobs:
           formula_folder: Formula
           github_token: ${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}
 
-          commit_owner: homebrew-releaser
-          commit_email: homebrew-releaser@linux-tech.io
+          commit_owner: github-actions[bot]
+          commit_email: github-actions[bot]@users.noreply.github.com
 
           depends_on: |
             "kubernetes-cli"
             "yq"
 
-          install: 'bin.install "kd" => "kd"'
+          install: 'bin.install "src/kd.sh" => "kd"'

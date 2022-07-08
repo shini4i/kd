@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 print_help() {
-    echo "Usage: $0 <secret_name> <namespace>"
+    echo "Usage: $(basename "$0") <secret_name> <namespace>"
     echo "  <secret_name>   Name of the secret to decode"
-    echo "  <namespace>     Namespace of the secret"
+    echo "  <namespace>     Namespace of the secret (optional)"
 }
 
 parse_args() {
