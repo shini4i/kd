@@ -21,6 +21,8 @@ jobs:
           commit_owner: github-actions[bot]
           commit_email: github-actions[bot]@users.noreply.github.com
 
+          update_readme_table: true
+
           depends_on: |
             "kubernetes-cli"
             "yq"

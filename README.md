@@ -6,7 +6,7 @@ Kubernetes secrets Decoder
 ![Version](https://img.shields.io/github/v/tag/shini4i/kd?style=plastic)
 ![license](https://img.shields.io/github/license/shini4i/kd?style=plastic)
 
-![demo](https://i.ibb.co/TbcXn8c/demo.png)
+<img src="https://raw.githubusercontent.com/shini4i/assets/main/src/kd/demo.png" alt="Showcase" height="441" width="620">
 </div>
 
 <b>kd</b> is yet another attempt to create a super simple and easy to use cli tool
