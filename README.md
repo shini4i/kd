@@ -3,7 +3,7 @@
 # kd
 Kubernetes secrets Decoder
 
-![Shell](https://img.shields.io/badge/shell-bash-blue)
+![Shell](https://img.shields.io/badge/shell-bash-green)
 ![Version](https://img.shields.io/github/v/tag/shini4i/kd)
 ![license](https://img.shields.io/github/license/shini4i/kd)
 
