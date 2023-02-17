@@ -51,3 +51,9 @@ kd my-secret
 # Decode a secret in a specific namespace
 kd my-secret my-namespace
 ```
+
+## Contributing
+
+Contributions to `kd` are welcome! Please open an issue or a pull request if you find a bug or want to submit a patch.
+
+New feature requests are not expected, but suggestions for improving the existing functionality or fixing bugs are appreciated.
