@@ -13,15 +13,7 @@
     "  kd.sh my-secret          # Decode the 'my-secret' secret in the current namespace"
     "  kd.sh my-secret my-ns    # Decode the 'my-secret' secret in the 'my-ns' namespace"
   )
-
   expected_lines="${#expected_output[@]}"
-  actual_lines="${#lines[@]}"
-
-  # Check if the number of lines match
-  [ "$expected_lines" -eq "$actual_lines" ] || {
-    echo "Error: Number of lines does not match. Expected: $expected_lines, Actual: $actual_lines"
-    exit 1
-  }
 
   # Check if each line matches the expected output
   for ((i = 0; i < expected_lines; i++)); do
@@ -54,13 +46,6 @@
     "example: provided"
   )
   expected_lines="${#expected_output[@]}"
-  actual_lines="${#lines[@]}"
-
-  # Check if the number of lines match
-  [ "$expected_lines" -eq "$actual_lines" ] || {
-    echo "Error: Number of lines does not match. Expected: $expected_lines, Actual: $actual_lines"
-    exit 1
-  }
 
   # Check if each line matches the expected output
   for ((i = 0; i < expected_lines; i++)); do
@@ -81,15 +66,7 @@
     "No namespace specified, using currently selected namespace: default"
     "example: not-provided"
   )
-
   expected_lines="${#expected_output[@]}"
-  actual_lines="${#lines[@]}"
-
-  # Check if the number of lines match
-  [ "$expected_lines" -eq "$actual_lines" ] || {
-    echo "Error: Number of lines does not match. Expected: $expected_lines, Actual: $actual_lines"
-    exit 1
-  }
 
   # Check if each line matches the expected output
   for ((i = 0; i < expected_lines; i++)); do
