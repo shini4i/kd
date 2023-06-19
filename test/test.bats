@@ -1,10 +1,7 @@
 #!/usr/bin/env bats
 
 setup() {
-  load 'test_helper/bats-support/load'
   load 'test_helper/bats-assert/load'
-  DIR="$(cd "$(dirname "$BATS_TEST_FILENAME")" >/dev/null 2>&1 && pwd)"
-  PATH="$DIR/../src:$PATH"
 }
 
 @test "script should return specific output when no parameters are provided" {
@@ -39,14 +36,7 @@ EOF
 
 @test "script should take value from specific secret in a provided namespace" {
   run ./src/kd.sh example-secret example-ns
-
-  local expected_output
-
-  expected_output=(
-    "example: provided"
-  )
-
-  assert_output "${expected_output[@]}"
+  assert_output "example: provided"
 }
 
 @test "script should fall back to current namespace when no namespace is provided" {
@@ -60,5 +50,6 @@ No namespace specified, using currently selected namespace: default
 example: not-provided
 EOF
   )
+
   assert_output "${expected_output}"
 }
