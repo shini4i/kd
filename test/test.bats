@@ -18,7 +18,10 @@
   actual_lines="${#lines[@]}"
 
   # Check if the number of lines match
-  [ "$expected_lines" -eq "$actual_lines" ]
+  [ "$expected_lines" -eq "$actual_lines" ] || {
+    echo "Error: Number of lines does not match. Expected: $expected_lines, Actual: $actual_lines"
+    exit 1
+  }
 
   # Check if each line matches the expected output
   for ((i = 0; i < expected_lines; i++)); do
@@ -54,7 +57,10 @@
   actual_lines="${#lines[@]}"
 
   # Check if the number of lines match
-  [ "$expected_lines" -eq "$actual_lines" ]
+  [ "$expected_lines" -eq "$actual_lines" ] || {
+    echo "Error: Number of lines does not match. Expected: $expected_lines, Actual: $actual_lines"
+    exit 1
+  }
 
   # Check if each line matches the expected output
   for ((i = 0; i < expected_lines; i++)); do
@@ -80,7 +86,10 @@
   actual_lines="${#lines[@]}"
 
   # Check if the number of lines match
-  [ "$expected_lines" -eq "$actual_lines" ]
+  [ "$expected_lines" -eq "$actual_lines" ] || {
+    echo "Error: Number of lines does not match. Expected: $expected_lines, Actual: $actual_lines"
+    exit 1
+  }
 
   # Check if each line matches the expected output
   for ((i = 0; i < expected_lines; i++)); do
