@@ -58,7 +58,10 @@
 
   # Check if each line matches the expected output
   for ((i = 0; i < expected_lines; i++)); do
-    [ "${lines[i]}" = "${expected_output[i]}" ]
+    if [ "${lines[i]}" != "${expected_output[i]}" ]; then
+      echo "Error: Line $((i+1)) does not match. Expected: '${expected_output[i]}', Actual: '${lines[i]}'"
+      exit 1
+    fi
   done
 
 }
@@ -72,15 +75,18 @@
     "No namespace specified, using currently selected namespace: default"
     "example: not-provided"
   )
+
   expected_lines="${#expected_output[@]}"
   actual_lines="${#lines[@]}"
 
   # Check if the number of lines match
   [ "$expected_lines" -eq "$actual_lines" ]
 
-
   # Check if each line matches the expected output
   for ((i = 0; i < expected_lines; i++)); do
-    [ "${lines[i]}" = "${expected_output[i]}" ]
+    if [ "${lines[i]}" != "${expected_output[i]}" ]; then
+      echo "Error: Line $((i+1)) does not match. Expected: '${expected_output[i]}', Actual: '${lines[i]}'"
+      exit 1
+    fi
   done
 }
