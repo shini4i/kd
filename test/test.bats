@@ -12,19 +12,20 @@ setup() {
 
   local expected_output
 
-  expected_output=(
-    "Usage: kd.sh <secret_name> <namespace>"
-    "  <secret_name>   Name of the secret to decode"
-    "  <namespace>     Namespace of the secret (optional)"
-    "Examples:"
-    "  kd.sh my-secret          # Decode the 'my-secret' secret in the current namespace"
-    "  kd.sh my-secret my-ns    # Decode the 'my-secret' secret in the 'my-ns' namespace"
-  )
+  expected_output=$(
+cat <<EOF
+Usage: kd.sh <secret_name> <namespace>
+  <secret_name>   Name of the secret to decode
+  <namespace>     Namespace of the secret (optional)
 
-  # Assert that the output lines match the expected output lines
-  for ((i = 0; i < ${#expected_output[@]}; i++)); do
-    assert_line "${expected_output[i]}"
-  done
+Examples:
+  kd.sh my-secret          # Decode the 'my-secret' secret in the current namespace
+  kd.sh my-secret my-ns    # Decode the 'my-secret' secret in the 'my-ns' namespace
+EOF
+)
+
+  # Check if the entire output matches the expected output
+  assert_output "$expected_output"
 }
 
 @test "script should fail if it can't detect currently selected namespace" {
@@ -45,10 +46,7 @@ setup() {
     "example: provided"
   )
 
-  # Assert that the output lines match the expected output lines
-  for ((i = 0; i < ${#expected_output[@]}; i++)); do
-    assert_line "${expected_output[i]}"
-  done
+  assert_output "${expected_output[@]}"
 }
 
 @test "script should fall back to current namespace when no namespace is provided" {
@@ -56,13 +54,11 @@ setup() {
 
   local expected_output
 
-  expected_output=(
-    "No namespace specified, using currently selected namespace: default"
-    "example: not-provided"
-  )
-
-  # Assert that the output lines match the expected output lines
-  for ((i = 0; i < ${#expected_output[@]}; i++)); do
-    assert_line "${expected_output[i]}"
-  done
+  expected_output=$(
+    cat <<EOF
+No namespace specified, using currently selected namespace: default
+example: not-provided
+EOF
+)
+  assert_output "${expected_output}"
 }
