@@ -1,5 +1,12 @@
 #!/usr/bin/env bats
 
+setup() {
+  load 'test_helper/bats-support/load'
+  load 'test_helper/bats-assert/load'
+  DIR="$(cd "$(dirname "$BATS_TEST_FILENAME")" >/dev/null 2>&1 && pwd)"
+  PATH="$DIR/../src:$PATH"
+}
+
 @test "script should return specific output when no parameters are provided" {
   run ./src/kd.sh
 
@@ -13,11 +20,10 @@
     "  kd.sh my-secret          # Decode the 'my-secret' secret in the current namespace"
     "  kd.sh my-secret my-ns    # Decode the 'my-secret' secret in the 'my-ns' namespace"
   )
-  expected_lines="${#expected_output[@]}"
 
-  # Check if each line matches the expected output
-  for ((i = 0; i < expected_lines; i++)); do
-    [ "${lines[i]}" = "${expected_output[i]}" ]
+  # Assert that the output lines match the expected output lines
+  for ((i = 0; i < ${#expected_output[@]}; i++)); do
+    assert_line "${expected_output[i]}"
   done
 }
 
@@ -26,15 +32,8 @@
 
   run ./src/kd.sh my-secret
 
-  local expected_status
-  local expected_output
-
-  expected_status=1
-  expected_output="Error: Unable to get current namespace"
-
-  [ "$status" -eq "$expected_status" ]
-
-  echo "$output" | grep -q "$expected_output"
+  assert_equal "$status" 1
+  assert_output --partial "Error: Unable to get current namespace"
 }
 
 @test "script should take value from specific secret in a provided namespace" {
@@ -45,16 +44,11 @@
   expected_output=(
     "example: provided"
   )
-  expected_lines="${#expected_output[@]}"
 
-  # Check if each line matches the expected output
-  for ((i = 0; i < expected_lines; i++)); do
-    if [ "${lines[i]}" != "${expected_output[i]}" ]; then
-      echo "Error: Line $((i+1)) does not match. Expected: '${expected_output[i]}', Actual: '${lines[i]}'"
-      exit 1
-    fi
+  # Assert that the output lines match the expected output lines
+  for ((i = 0; i < ${#expected_output[@]}; i++)); do
+    assert_line "${expected_output[i]}"
   done
-
 }
 
 @test "script should fall back to current namespace when no namespace is provided" {
@@ -66,13 +60,9 @@
     "No namespace specified, using currently selected namespace: default"
     "example: not-provided"
   )
-  expected_lines="${#expected_output[@]}"
 
-  # Check if each line matches the expected output
-  for ((i = 0; i < expected_lines; i++)); do
-    if [ "${lines[i]}" != "${expected_output[i]}" ]; then
-      echo "Error: Line $((i+1)) does not match. Expected: '${expected_output[i]}', Actual: '${lines[i]}'"
-      exit 1
-    fi
+  # Assert that the output lines match the expected output lines
+  for ((i = 0; i < ${#expected_output[@]}; i++)); do
+    assert_line "${expected_output[i]}"
   done
 }
