@@ -13,11 +13,19 @@ EOF
 }
 
 set_namespace() {
-    if [ $# -eq 1 ]; then
+    if [ -n "$1" ]; then
         namespace=$1
     else
-        namespace=$(kubectl config view --minify -o jsonpath='{..namespace}') || { echo "Error: Unable to get current namespace"; exit 1; }
-        echo "No namespace specified, using currently selected namespace: $namespace"
+        if namespace=$(kubectl config view --minify -o jsonpath='{..namespace}'); then
+          if [ -z "$namespace" ]; then
+            echo "Could not get namespace from current context, please check your kubeconfig"
+            exit 1
+          fi
+          echo "No namespace specified, using currently selected namespace: $namespace"
+        else
+          echo "Error: Unable to get current namespace"
+          exit 1
+        fi
     fi
 }
 
@@ -31,7 +39,11 @@ main() {
 
     set_namespace "$2"
 
-    secret_content=$(kubectl get secret "$secret_name" -n "$namespace" -o yaml) || { echo "Error: Unable to get secret $secret_name in namespace $namespace"; exit 1; }
+    if ! secret_content=$(kubectl get secret "$secret_name" -n "$namespace" -o yaml); then
+      echo "Error: Unable to get secret $secret_name in namespace $namespace"
+      exit 1
+    fi
+
     echo "$secret_content" | yq e '.data | to_entries | .[] | .key + ": " + (.value | @base64d)'
 }
 
