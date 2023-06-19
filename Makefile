@@ -9,3 +9,4 @@ prepare_test_secrets: ## Prepare test secrets
 .PHONY: test
 test: prepare_test_secrets ## Run tests
 	@echo "Running tests..."
+	@bats test
