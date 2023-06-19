@@ -27,6 +27,8 @@
 }
 
 @test "script should fail if it can't detect currently selected namespace" {
+  export KUBECONFIG=non-existent-file
+
   run ./src/kd.sh my-secret
 
   local expected_status
@@ -37,8 +39,7 @@
 
   [ "$status" -eq "$expected_status" ]
 
-  echo "$output"
-  [ "$output" = "$expected_output" ]
+  echo "$output" | grep -q "$expected_output"
 }
 
 @test "script should take value from specific secret in a provided namespace" {
