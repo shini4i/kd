@@ -13,10 +13,24 @@ EOF
 }
 
 set_namespace() {
+
+    output=$(kubectl config view --minify -o jsonpath='{..namespace}')
+    exit_code=$?
+
+    if [[ $exit_code -ne 0 ]]; then
+        echo "Error: Unable to get current namespace"
+        exit 1
+    fi
+
     if [ $# -eq 1 ]; then
         namespace=$1
     else
-        namespace=$(kubectl config view --minify -o jsonpath='{..namespace}') || { echo "Error: Unable to get current namespace"; exit 1; }
+        namespace=$(kubectl config view --minify -o jsonpath='{..namespace}')
+        exit_code=$?
+        if [[ "$exit_code" -ne 0 ]]; then
+          echo "Error: Unable to get current namespace"
+          exit 1
+        fi
         echo "No namespace specified, using currently selected namespace: $namespace"
     fi
 }
