@@ -21,7 +21,7 @@
   [ "$expected_lines" -eq "$actual_lines" ]
 
   # Check if each line matches the expected output
-  for ((i=0; i<expected_lines; i++)); do
+  for ((i = 0; i < expected_lines; i++)); do
     [ "${lines[i]}" = "${expected_output[i]}" ]
   done
 }
@@ -43,11 +43,30 @@
 }
 
 @test "script should take value from specific secret in a provided namespace" {
-  run ./src/kd.sh my-secret my-ns
+  run ./src/kd.sh example-secret example-ns
 
 }
 
 @test "script should fall back to current namespace when no namespace is provided" {
-  run ./src/kd.sh my-secret
+  run ./src/kd.sh example-secret
 
+  local expected_output
+
+  expected_output=(
+    "No namespace specified, using currently selected namespace: default"
+    "example: not-provided"
+  )
+  expected_lines="${#expected_output[@]}"
+  actual_lines="${#lines[@]}"
+
+  # Check if the number of lines match
+  [ "$expected_lines" -eq "$actual_lines" ]
+
+
+  # Check if each line matches the expected output
+  for ((i = 0; i < expected_lines; i++)); do
+    echo "${lines[i]}"
+    echo "${expected_output[i]}"
+    [ "${lines[i]}" = "${expected_output[i]}" ]
+  done
 }
