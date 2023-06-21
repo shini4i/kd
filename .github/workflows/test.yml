@@ -20,4 +20,4 @@ jobs:
           bats-version: 1.9.0
 
       - name: Run BATS Tests
-        run: make test
+        run: make ci-test

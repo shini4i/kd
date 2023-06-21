@@ -5,6 +5,7 @@ Kubernetes secrets Decoder
 
 ![Shell](https://img.shields.io/badge/shell-bash-green)
 ![Version](https://img.shields.io/github/v/tag/shini4i/kd)
+![Downloads)](https://img.shields.io/github/downloads/shini4i/kd/total)
 ![license](https://img.shields.io/github/license/shini4i/kd)
 
 <img src="https://raw.githubusercontent.com/shini4i/assets/main/src/kd/demo.png" alt="Showcase" height="441" width="620">
