@@ -1,2 +1,10 @@
+# IDE Related directories
 .idea
+.vscode
+
+# Coverage related directories
 coverage
+
+# Project configuration files
+.env
+.envrc
