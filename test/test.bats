@@ -55,7 +55,7 @@ EOF
   assert_output "${expected_output}"
 }
 
-@test "script should fail to get the non-existing secret with reasonable error " {
+@test "script should fail to get the non-existing secret with reasonable error" {
   run ./src/kd.sh non-existing-secret
 
   assert_output --partial "Error: Unable to get secret non-existing-secret in namespace default"
