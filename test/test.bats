@@ -1,5 +1,10 @@
 #!/usr/bin/env bats
 
+setup() {
+  load 'libs/bats-support/load'
+  load 'libs/bats-assert/load'
+}
+
 @test "script should return specific output when no parameters are provided" {
   run ./src/kd.sh
 
