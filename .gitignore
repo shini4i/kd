@@ -7,4 +7,6 @@ coverage
 
 # Project configuration files
 .env
-.envrc
+
+# nix
+.direnv/

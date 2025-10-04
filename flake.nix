@@ -40,5 +40,13 @@
             platforms = platforms.all;
           };
         };
+
+        devShells.default = pkgs.mkShell {
+          packages = [
+            pkgs.kubectl
+            pkgs.yq-go
+            pkgs.bats
+          ];
+        };
       });
 }
