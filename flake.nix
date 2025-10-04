@@ -27,7 +27,7 @@
             install -Dm755 $src/src/kd.sh $out/bin/kd
 
             wrapProgram $out/bin/kd \
-              --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.kubectl pkgs.yq ]}
+              --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.kubectl pkgs.yq-go ]}
 
             runHook postInstall
           '';
