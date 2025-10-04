@@ -24,7 +24,11 @@
           installPhase = ''
             runHook preInstall
 
+            # Install the main script
             install -Dm755 $src/src/kd.sh $out/bin/kd
+
+            # Install Zsh completion
+            install -Dm644 $src/completion/_kd.zsh $out/share/zsh/site-functions/_kd
 
             wrapProgram $out/bin/kd \
               --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.kubectl pkgs.yq-go ]}
