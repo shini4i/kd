@@ -1,8 +1,8 @@
 #!/usr/bin/env bats
 
 setup() {
-  load 'libs/bats-support/load'
-  load 'libs/bats-assert/load'
+  load '/usr/lib/bats-support/load.bash'
+  load '/usr/lib/bats-assert/load.bash'
 }
 
 @test "script should return specific output when no parameters are provided" {
