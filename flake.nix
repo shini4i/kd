@@ -45,7 +45,7 @@
           '';
 
           meta = with pkgs.lib; {
-            description = "Kubernetes secrets Decoder";
+            description = "A bash script that decodes Kubernetes secrets";
             homepage = "https://github.com/shini4i/kd";
             license = licenses.mit;
             maintainers = [ { name = "shini4i"; github = "shini4i"; } ];
