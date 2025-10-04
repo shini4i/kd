@@ -1,5 +1,39 @@
 {
   "nodes": {
+    "bats-assert": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755282575,
+        "narHash": "sha256-L1NAZGqS/Vo9X4xEdZ5KIFqiGITc+mVKatTTrf6mkm4=",
+        "owner": "bats-core",
+        "repo": "bats-assert",
+        "rev": "d396ee3e943f7c1c058f3a1f4baddc12fab875ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bats-core",
+        "ref": "v2.2.0",
+        "repo": "bats-assert",
+        "type": "github"
+      }
+    },
+    "bats-support": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1480459956,
+        "narHash": "sha256-4N7XJS5XOKxMCXNC7ef9halhRpg79kUqDuRnKcrxoeo=",
+        "owner": "bats-core",
+        "repo": "bats-support",
+        "rev": "24a72e14349690bcbf7c151b9d2d1cdd32d36eb1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bats-core",
+        "ref": "v0.3.0",
+        "repo": "bats-support",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -36,6 +70,8 @@
     },
     "root": {
       "inputs": {
+        "bats-assert": "bats-assert",
+        "bats-support": "bats-support",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs"
       }

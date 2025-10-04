@@ -10,3 +10,4 @@ coverage
 
 # nix
 .direnv/
+test/test_helper
