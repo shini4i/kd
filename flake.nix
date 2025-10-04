@@ -48,7 +48,7 @@
             description = "A bash script that decodes Kubernetes secrets";
             homepage = "https://github.com/shini4i/kd";
             license = licenses.mit;
-            maintainers = [ { name = "shini4i"; github = "shini4i"; } ];
+            maintainers = [ { name = "shini4i"; email = "github@shini4i.dev"; github = "shini4i"; } ];
             platforms = platforms.all;
           };
         };
