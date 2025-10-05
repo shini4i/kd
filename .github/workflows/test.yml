@@ -7,14 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create k8s Kind Cluster
-        uses: helm/kind-action@v1.10.0
+        uses: helm/kind-action@v1.12.0
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
         with:
-          submodules: true
-      - name: Setup BATS
-        uses: mig4/setup-bats@v1
-        with:
-          bats-version: 1.11.0
-      - name: Run BATS Tests
-        run: make ci-test
+          nix_path: nixpkgs=channel:nixos-unstable
+      - name: Run BATS Tests via Nix
+        run: nix develop -c make ci-test

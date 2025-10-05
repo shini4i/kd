@@ -12,13 +12,13 @@ setup() {
 
   expected_output=$(
     cat <<EOF
-Usage: kd.sh <secret_name> <namespace>
+Usage: kd <secret_name> <namespace>
   <secret_name>   Name of the secret to decode
   <namespace>     Namespace of the secret (optional)
 
 Examples:
-  kd.sh my-secret          # Decode the 'my-secret' secret in the current namespace
-  kd.sh my-secret my-ns    # Decode the 'my-secret' secret in the 'my-ns' namespace
+  kd my-secret          # Decode the 'my-secret' secret in the current namespace
+  kd my-secret my-ns    # Decode the 'my-secret' secret in the 'my-ns' namespace
 EOF
   )
 

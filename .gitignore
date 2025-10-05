@@ -7,4 +7,7 @@ coverage
 
 # Project configuration files
 .env
-.envrc
+
+# nix
+.direnv/
+test/test_helper

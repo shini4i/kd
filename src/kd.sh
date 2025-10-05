@@ -2,13 +2,13 @@
 
 print_help() {
   cat <<EOF
-Usage: $(basename "$0") <secret_name> <namespace>
+Usage: kd <secret_name> <namespace>
   <secret_name>   Name of the secret to decode
   <namespace>     Namespace of the secret (optional)
 
 Examples:
-  $(basename "$0") my-secret          # Decode the 'my-secret' secret in the current namespace
-  $(basename "$0") my-secret my-ns    # Decode the 'my-secret' secret in the 'my-ns' namespace
+  kd my-secret          # Decode the 'my-secret' secret in the current namespace
+  kd my-secret my-ns    # Decode the 'my-secret' secret in the 'my-ns' namespace
 EOF
 }
 
