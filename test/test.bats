@@ -48,7 +48,7 @@ setup() {
   run ./src/kd.sh my-secret
 
   assert_failure
-  assert_output --partial "Unable to determine current namespace"
+  assert_output --partial "Failed to query kubectl config"
 }
 
 @test "script should take value from specific secret in a provided namespace" {
