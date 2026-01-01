@@ -33,7 +33,7 @@ brew install shini4i/tap/kd
 
 ### Option 2: Install manually
 
-To install `kd` manually, download the `scr/kd.sh` script and add it to your PATH. You can do this by running the following commands:
+To install `kd` manually, download the `src/kd.sh` script and add it to your PATH. You can do this by running the following commands:
 
 ```bash
 curl https://raw.githubusercontent.com/shini4i/kd/main/src/kd.sh -o kd

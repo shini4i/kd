@@ -38,6 +38,9 @@
             # Install Zsh completion
             install -Dm644 $src/completion/_kd.zsh $out/share/zsh/site-functions/_kd
 
+            # Install Bash completion
+            install -Dm644 $src/completion/_kd.bash $out/share/bash-completion/completions/kd
+
             wrapProgram $out/bin/kd \
               --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.kubectl pkgs.yq-go ]}
 
@@ -58,6 +61,7 @@
             pkgs.kubectl
             pkgs.yq-go
             pkgs.bats
+            pkgs.shellcheck
           ];
 
           shellHook = ''
