@@ -45,6 +45,7 @@ jobs:
           github-token: ${{ secrets.NIXPKGS_TOKEN }}
 
   releaser-github:
+    needs: [releaser-homebrew, releaser-nixpkgs]
     runs-on: ubuntu-latest
     name: github-releaser
     steps:
