@@ -5,6 +5,7 @@ on: pull_request
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Create k8s Kind Cluster
         uses: helm/kind-action@v1.12.0
@@ -13,5 +14,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           nix_path: nixpkgs=channel:nixos-unstable
+      - name: Lint with ShellCheck
+        run: nix develop -c make lint
       - name: Run BATS Tests via Nix
         run: nix develop -c make ci-test
