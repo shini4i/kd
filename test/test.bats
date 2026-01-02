@@ -32,14 +32,14 @@ setup() {
   run ./src/kd.sh -v
 
   assert_success
-  assert_output "kd version 0.1.4"
+  assert_output "kd version 0.2.0"
 }
 
 @test "script should return version when --version flag is provided" {
   run ./src/kd.sh --version
 
   assert_success
-  assert_output "kd version 0.1.4"
+  assert_output "kd version 0.2.0"
 }
 
 @test "script should fail if it can't detect currently selected namespace" {

@@ -18,50 +18,16 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        version = "0.2.0";
       in
       {
-        packages.default = pkgs.stdenv.mkDerivation {
-          pname = "kd";
-          inherit version;
-
-          src = ./.;
-
-          nativeBuildInputs = [ pkgs.makeWrapper ];
-
-          installPhase = ''
-            runHook preInstall
-
-            # Install the main script
-            install -Dm755 $src/src/kd.sh $out/bin/kd
-
-            # Install Zsh completion
-            install -Dm644 $src/completion/_kd.zsh $out/share/zsh/site-functions/_kd
-
-            # Install Bash completion
-            install -Dm644 $src/completion/_kd.bash $out/share/bash-completion/completions/kd
-
-            wrapProgram $out/bin/kd \
-              --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.kubectl pkgs.yq-go ]}
-
-            runHook postInstall
-          '';
-
-          meta = with pkgs.lib; {
-            description = "A bash script that decodes Kubernetes secrets";
-            homepage = "https://github.com/shini4i/kd";
-            license = licenses.mit;
-            maintainers = [ { name = "shini4i"; email = "github@shini4i.dev"; github = "shini4i"; } ];
-            platforms = platforms.all;
-          };
-        };
-
         devShells.default = pkgs.mkShell {
           packages = [
             pkgs.kubectl
             pkgs.yq-go
             pkgs.bats
             pkgs.shellcheck
+            pkgs.bump-my-version
+            pkgs.go-task
           ];
 
           shellHook = ''

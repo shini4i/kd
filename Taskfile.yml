@@ -1,0 +1,49 @@
+version: '3'
+
+tasks:
+  default:
+    desc: List all available tasks
+    silent: true
+    cmds:
+      - task --list
+
+  check-deps:
+    desc: Check that required dependencies are installed
+    silent: true
+    preconditions:
+      - sh: command -v kubectl >/dev/null 2>&1
+        msg: "Error: kubectl is required but not installed"
+      - sh: command -v yq >/dev/null 2>&1
+        msg: "Error: yq is required but not installed"
+      - sh: command -v bats >/dev/null 2>&1
+        msg: "Error: bats is required but not installed"
+    cmds:
+      - echo "All dependencies are installed"
+
+  lint:
+    desc: Run shellcheck on all bash scripts
+    cmds:
+      - echo "===> Running shellcheck..."
+      - shellcheck src/kd.sh completion/_kd.bash
+
+  prepare:
+    desc: Prepare test secrets (idempotent)
+    cmds:
+      - echo "===> Preparing test secrets..."
+      - kubectl create ns example-ns 2>/dev/null || true
+      - kubectl create secret generic example-secret --from-literal=example=provided -n example-ns 2>/dev/null || true
+      - kubectl config set-context --current --namespace=default
+      - kubectl create secret generic example-secret --from-literal=example=not-provided 2>/dev/null || true
+      - kubectl create secret generic multi-key-secret --from-literal=key1=value1 --from-literal=key2=value2 --from-literal=key3=value3 2>/dev/null || true
+      - kubectl create secret generic special-secret --from-literal='key=value with spaces' 2>/dev/null || true
+
+  test:
+    desc: Run tests
+    deps: [check-deps]
+    cmds:
+      - echo "===> Running tests..."
+      - bats test
+
+  ci-test:
+    desc: Run tests in CI
+    deps: [prepare, test]
