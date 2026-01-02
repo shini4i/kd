@@ -1,4 +1,4 @@
-name: Brew Release
+name: Brew & NixPKG Release
 
 on:
   push:
@@ -6,12 +6,12 @@ on:
       - 'v*'
 
 jobs:
-  homebrew-releaser:
+  releaser:
     runs-on: ubuntu-latest
     name: homebrew-releaser
     steps:
       - name: Release my project to my Homebrew tap
-        uses: Justintime50/homebrew-releaser@v1
+        uses: Justintime50/homebrew-releaser@v3
         with:
           homebrew_owner: shini4i
           homebrew_tap: homebrew-tap
@@ -28,3 +28,19 @@ jobs:
             "yq"
 
           install: 'bin.install "src/kd.sh" => "kd"'
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Update nixpkgs
+        uses: shini4i/nixpkgs-updater@v1
+        with:
+          package-name: kd
+          version: ${{ github.ref_name }}
+          target-repo: shini4i/nixpkgs
+          github-token: ${{ secrets.NIXPKGS_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
+        with:
+          generate_release_notes: true
