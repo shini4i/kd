@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 jobs:
-  homebrew-releaser:
+  releaser:
     runs-on: ubuntu-latest
     name: homebrew-releaser
     steps:
@@ -29,9 +29,6 @@ jobs:
 
           install: 'bin.install "src/kd.sh" => "kd"'
 
-  update-nixpkgs:
-    runs-on: ubuntu-latest
-    steps:
       - name: Install Nix
         uses: cachix/install-nix-action@v31
 
@@ -42,3 +39,8 @@ jobs:
           version: ${{ github.ref_name }}
           target-repo: shini4i/nixpkgs
           github-token: ${{ secrets.NIXPKGS_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
+        with:
+          generate_release_notes: true
