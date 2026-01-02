@@ -8,7 +8,7 @@
 
 set -euo pipefail
 
-readonly VERSION="0.1.4"
+readonly VERSION="0.2.0"
 
 # Prints an error message to stderr in red.
 # Arguments:
